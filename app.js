@@ -4,10 +4,17 @@ require("express-async-errors");
 // Creating Express App
 const express = require("express");
 const app = express();
+
+// Security Packages
 const helmet = require("helmet");
 const cors = require("cors");
 const xssclean = require("xss-clean");
 const rateLimiter = require("express-rate-limit");
+
+// Swagger
+const swaggerUI = require("swagger-ui-express");
+const YAML = require("yamljs");
+const swaggerDocument = YAML.load("./swagger.yaml");
 
 // ConnectDB
 const connectDB = require("./db/connect");
@@ -38,9 +45,12 @@ app.use(cors());
 app.use(xssclean());
 
 // Home route
-app.get('/', (req, res) => {
-  res.send('Jobs API');
+app.get("/", (req, res) => {
+  res.send('<h1>Job Posting API</h1><a href="/api-docs">Documentation</a>');
 });
+
+// Using swagger
+app.use("/api-docs", swaggerUI.serve, swaggerUI.setup(swaggerDocument));
 
 // Using Middlewares and routes
 app.use("/api/v1/auth", authRouter);
