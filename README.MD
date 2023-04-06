@@ -1,7 +1,7 @@
 # JOB POSTING API
 
 This API can create jobs for a particular user and has CRUD functionalities.
-It is avaiable as documentation made using swagger-ui.
+It is available as documentation made using swagger-UI.
 It has authentication too.
 
 ## How to use :
